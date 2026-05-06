@@ -1,0 +1,51 @@
+version: v1
+
+components:
+- name: extract
+  docker:
+    file: extract/Dockerfile
+  env:
+  - name: S3_BUCKET
+    config-ref: S3_BUCKET
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__AWS_ACCESS_KEY_ID
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__AWS_ACCESS_KEY_ID
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__AWS_SECRET_ACCESS_KEY
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__AWS_SECRET_ACCESS_KEY
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__ENDPOINT_URL
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__ENDPOINT_URL
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__S3_URL_STYLE
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__S3_URL_STYLE
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__S3_USE_SSL
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__S3_USE_SSL
+  - name: DB_HOST
+    component-ref: db
+  - name: POSTGRES_DB
+    value: 'ducklake'
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG
+    value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(DB_HOST):5432/$(POSTGRES_DB)"
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__STORAGE__BUCKET_URL
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__STORAGE__BUCKET_URL
+  - name: SCHEMA__NAMING
+    config-ref: SCHEMA__NAMING
+  - name: POSTGRES_USER
+    config-ref: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    config-ref: POSTGRES_PASSWORD
+  scheduled: "0 2 * * *"
+
+- name: db
+  docker:
+    image: postgres:18
+  env:
+  - name: POSTGRES_USER
+    config-ref: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    config-ref: POSTGRES_PASSWORD
+  - name: POSTGRES_DB
+    value: 'ducklake'
+  ports:
+  - 5432
+  storage:
+  - name: database-data
+    path: /var/lib/postgresql/data
+    size: 100Mi

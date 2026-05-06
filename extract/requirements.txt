@@ -1,0 +1,4 @@
+penaltyblog
+pandas
+dlt
+python-dotenv
