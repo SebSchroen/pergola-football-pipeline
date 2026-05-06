@@ -47,5 +47,5 @@ components:
   - 5432
   storage:
   - name: database-data
-    path: /var/lib/postgresql/data
+    path: /var/lib/postgresql
     size: 100Mi
