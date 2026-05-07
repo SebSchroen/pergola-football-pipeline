@@ -21,16 +21,16 @@ components:
     component-ref: db
   - name: POSTGRES_DB
     value: 'ducklake'
+  - name: POSTGRES_USER
+    config-ref: postgres_user
+  - name: POSTGRES_PASSWORD
+    config-ref: postgres_password
   - name: DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG
     value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(DB_HOST):5432/$(POSTGRES_DB)
   - name: DESTINATION__DUCKLAKE__CREDENTIALS__STORAGE__BUCKET_URL
     config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__STORAGE__BUCKET_URL
   - name: SCHEMA__NAMING
     config-ref: SCHEMA__NAMING
-  - name: POSTGRES_USER
-    config-ref: postgres_user
-  - name: POSTGRES_PASSWORD
-    config-ref: postgres_password
   scheduled: "@release"
 
 - name: db
