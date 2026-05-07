@@ -28,9 +28,9 @@ components:
   - name: SCHEMA__NAMING
     config-ref: SCHEMA__NAMING
   - name: POSTGRES_USER
-    config-ref: POSTGRES_USER
+    config-ref: postgres_user
   - name: POSTGRES_PASSWORD
-    config-ref: POSTGRES_PASSWORD
+    config-ref: postgres_password
   scheduled: "@release"
 
 - name: db
@@ -38,9 +38,9 @@ components:
     image: postgres:18
   env:
   - name: POSTGRES_USER
-    config-ref: POSTGRES_USER
+    config-ref: postgres_user
   - name: POSTGRES_PASSWORD
-    config-ref: POSTGRES_PASSWORD
+    config-ref: postgres_password
   - name: POSTGRES_DB
     value: 'ducklake'
   ports:
