@@ -17,4 +17,4 @@ COPY . .
 # EXPOSE 80
 
 # Run the dlt process
-CMD ["python", "penaltyblog_2_ducklake.py"]
+CMD ["python", "extract/penaltyblog_2_ducklake.py"]
