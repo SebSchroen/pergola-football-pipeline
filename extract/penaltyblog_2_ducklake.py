@@ -10,6 +10,9 @@ load_dotenv()
 
 
 S3_BUCKET = os.environ["S3_BUCKET"]
+CATALOG_URL = os.environ["DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG"]
+# Debugging:
+print(CATALOG_URL)
 print(S3_BUCKET)
 # Fixtures
 
