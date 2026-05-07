@@ -5,10 +5,6 @@ import os
 
 from utils import get_dynamic_fixture_history
 
-from dotenv import load_dotenv
-load_dotenv()
-
-
 S3_BUCKET = os.environ["S3_BUCKET"]
 CATALOG_URL = os.environ["DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG"]
 # Debugging:

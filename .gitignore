@@ -221,3 +221,5 @@ __marimo__/
 docker-compose.yml
 
 add_config.sh
+
+db-data/
