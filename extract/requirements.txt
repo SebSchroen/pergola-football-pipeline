@@ -2,3 +2,4 @@ penaltyblog
 pandas
 dlt
 python-dotenv
+dlt[ducklake]
