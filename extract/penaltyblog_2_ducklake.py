@@ -3,16 +3,22 @@ import pandas as pd
 import dlt
 import os
 
-from utils import get_dynamic_fixture_history
+from utils import get_dynamic_fixture_history, get_understat_fixture_data
+
+from dotenv import load_dotenv
+
+load_dotenv(override=False)
+
 
 S3_BUCKET = os.environ["S3_BUCKET"]
-CATALOG_URL = os.environ["DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG"]
-# Debugging:
-print(CATALOG_URL)
-print(S3_BUCKET)
+
+# xGoals
+
+xgoals_history = get_understat_fixture_data(league_name="DEU Bundesliga 1", start_history_year=2017)
+
+
+
 # Fixtures
-
-
 fixture_history = get_dynamic_fixture_history(league_name="DEU Bundesliga 1", start_history_year=2006)
 
 
@@ -42,8 +48,15 @@ pipeline = dlt.pipeline(
 )
 
 
+@dlt.resource(name="ratings_history", columns={
+    "team": {"data_type": "text"}
+})
 
-print()
+def ratings_resource():
+    yield ratings_history_pd
+
+
+
 @dlt.resource(name="fixture_history", columns={
     "season": {"data_type": "text"},
     "competition": {"data_type": "text"},
@@ -59,16 +72,18 @@ print()
 def fixtures_resource():
     yield fixture_history
 
-@dlt.resource(name="ratings_history", columns={
-    "team": {"data_type": "text"}
-})
-def ratings_resource():
-    yield ratings_history_pd
 
 
-print()
+@dlt.resource(name="xgoals_history")
+
+
+def xgoals_resource():
+    yield xgoals_history
+
+
+
 info = pipeline.run(
-    [fixtures_resource(), ratings_resource()],
+    [fixtures_resource(), ratings_resource(), xgoals_resource()],
     loader_file_format="parquet"
 )
 
