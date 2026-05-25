@@ -1,0 +1,34 @@
+ducklake_dbt:
+  target: dev
+  outputs:
+    # Single-player: SQLite catalog, no Postgres needed
+    dev:
+      type: duckdb
+      path: ":memory:"
+      schema: stg
+      database: dev_analytics
+      extensions:
+        - ducklake
+        - postgres
+        - httpfs
+      secrets:
+        - type: s3
+          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
+          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+          session_token: "{{ env_var('AWS_SESSION_TOKEN', '') }}"
+          region: "{{ env_var('AWS_REGION') }}"
+          endpoint: "{{ env_var('ENDPOINT_URL', '') | replace('https://', '') }}"
+          url_style: "path"
+      attach:
+        - path: "ducklake:postgres:{{ env_var('DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG') }}"
+          alias: raw
+          read_only: false
+          options:
+            DATA_PATH: "s3://{{ env_var('S3_BUCKET') }}"
+            METADATA_SCHEMA: ducklake
+
+        - path: "ducklake:postgres:{{ env_var('DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG') }}"
+          alias: dev_analytics
+          options:
+            DATA_PATH: "s3://{{ env_var('S3_BUCKET') }}"
+            METADATA_SCHEMA: ducklake

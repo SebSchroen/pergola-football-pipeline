@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: raw
+    schema: raw
+    tables:
+      - name: fixture_history
+      - name: ratings_history
+      - name: xgoals_history
+      - name: masterdata
