@@ -14,5 +14,5 @@ COPY . .
 RUN chmod +x docker-entrypoint.sh
 
 # Set entrypoint script
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/transform/docker-entrypoint.sh"]
 CMD ["run"]
