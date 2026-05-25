@@ -53,21 +53,21 @@ components:
     size: 100Mi
 
 - name: transform
-docker:
-  file: transform/Dockerfile
-env:
-- name: S3_BUCKET
-  config-ref: S3_BUCKET
-- name: AWS_ACCESS_KEY_ID
-  config-ref: AWS_ACCESS_KEY_ID
-- name: AWS_SECRET_ACCESS_KEY
-  config-ref: AWS_SECRET_ACCESS_KEY
-- name: AWS_REGION
-  config-ref: AWS_REGION
-- name: ENDPOINT_URL
-  config-ref: ENDPOINT_URL
-- name: DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG
-  config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG
-- name: DBT_TARGET
-  value: "dev"
-scheduled: "@release"
+  docker:
+    file: transform/Dockerfile
+  env:
+  - name: S3_BUCKET
+    config-ref: S3_BUCKET
+  - name: AWS_ACCESS_KEY_ID
+    config-ref: AWS_ACCESS_KEY_ID
+  - name: AWS_SECRET_ACCESS_KEY
+    config-ref: AWS_SECRET_ACCESS_KEY
+  - name: AWS_REGION
+    config-ref: AWS_REGION
+  - name: ENDPOINT_URL
+    config-ref: ENDPOINT_URL
+  - name: DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG
+    config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__CATALOG
+  - name: DBT_TARGET
+    value: "dev"
+  scheduled: "@release"
