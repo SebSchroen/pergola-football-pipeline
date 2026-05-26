@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir dbt-duckdb
 COPY . .
 
 # Make entrypoint script executable
-RUN chmod +x /app/transform/docker-entrypoint.sh
+RUN chmod +x app/transform/docker-entrypoint.sh
 
 # Set entrypoint script
-ENTRYPOINT ["/app/transform/docker-entrypoint.sh"]
+ENTRYPOINT ["app/transform/docker-entrypoint.sh"]
 CMD ["run"]
