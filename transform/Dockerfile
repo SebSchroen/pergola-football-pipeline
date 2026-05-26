@@ -8,11 +8,11 @@ WORKDIR /app
 RUN pip install --no-cache-dir dbt-duckdb
 
 # Copy project files
-COPY . .
+COPY transform/ .
 
 # Make entrypoint script executable
-RUN chmod +x /app/transform/docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
 
 # Set entrypoint script
-ENTRYPOINT ["app/transform/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["run"]

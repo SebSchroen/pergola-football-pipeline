@@ -1,1 +1,2 @@
-dbt run 
+#!/bin/sh
+dbt run
