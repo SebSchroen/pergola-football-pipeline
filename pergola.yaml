@@ -71,3 +71,4 @@ components:
   - name: DBT_TARGET
     value: "dev"
   scheduled: "@release"
+  max-retries: 0
