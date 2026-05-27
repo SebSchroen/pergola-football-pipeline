@@ -80,3 +80,18 @@ components:
     value: "dev"
   scheduled: "@release"
   max-retries: 0
+
+- name: pgadmin
+  docker:
+    image: dpage/pgadmin4
+  env:
+  - name: PGADMIN_DEFAULT_EMAIL
+    config-ref: PGADMIN_DEFAULT_EMAIL
+  - name: PGADMIN_DEFAULT_PASSWORD
+    config-ref: PGADMIN_DEFAULT_PASSWORD
+  - name: PGADMIN_CONFIG_SERVER_MODE
+    value: 'False'
+  storage:
+  - name: pgadmin-data
+    path: /var/lib/pgadmin
+    size: 500Mi
