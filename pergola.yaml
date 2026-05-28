@@ -80,3 +80,25 @@ components:
     value: "dev"
   scheduled: "25 7 * * *"
   max-retries: 0
+
+- name: pgadmin
+  user: 5050
+  docker:
+    image: dpage/pgadmin4
+  ports:
+    - 80
+  env:
+  - name: PGADMIN_DEFAULT_EMAIL
+    config-ref: PGADMIN_DEFAULT_EMAIL
+  - name: PGADMIN_DEFAULT_PASSWORD
+    config-ref: PGADMIN_DEFAULT_PASSWORD
+  - name: PGADMIN_CONFIG_SERVER_MODE
+    value: 'False'
+  storage:
+  - name: pgadmin-data
+    path: /var/lib/pgadmin
+    size: 500Mi
+  ingresses:
+  - host: console
+    path: /
+    port: 80
