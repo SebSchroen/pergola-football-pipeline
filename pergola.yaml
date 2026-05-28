@@ -93,6 +93,8 @@ components:
     config-ref: PGADMIN_DEFAULT_PASSWORD
   - name: PGADMIN_CONFIG_SERVER_MODE
     value: 'False'
+  - name: DB_HOST
+    component-ref: db
   storage:
   - name: pgadmin-data
     path: /var/lib/pgadmin
