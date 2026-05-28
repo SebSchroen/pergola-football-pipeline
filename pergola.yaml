@@ -82,9 +82,8 @@ components:
   max-retries: 0
 
 - name: pgadmin
-  user: 5050
   docker:
-    image: dpage/pgadmin4
+    file: pgadmin/Dockerfile
   ports:
     - 80
   env:
