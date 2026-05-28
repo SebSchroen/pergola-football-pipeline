@@ -95,3 +95,8 @@ components:
   - name: pgadmin-data
     path: /var/lib/pgadmin
     size: 500Mi
+
+ingresses:
+- host: console
+  path: /
+  port: 80
