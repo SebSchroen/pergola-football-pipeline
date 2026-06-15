@@ -107,6 +107,8 @@ components:
 - name: load-api
   docker:
     file: load/Dockerfile
+  ports:
+    - 8000 
   env:
   - name: S3_BUCKET
     config-ref: S3_BUCKET
