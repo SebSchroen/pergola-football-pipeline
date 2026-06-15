@@ -122,6 +122,8 @@ components:
     config-ref: ENDPOINT_URL
   - name: DB_HOST
     component-ref: db
+  - name: POSTGRES_HOST
+    component-ref: db
   - name: POSTGRES_DB
     value: 'ducklake'
   - name: POSTGRES_USER
