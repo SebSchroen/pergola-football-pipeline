@@ -78,7 +78,7 @@ components:
     value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(DB_HOST):5432/$(POSTGRES_DB)
   - name: DBT_TARGET
     value: "dev"
-  scheduled: "25 7 * * *"
+  scheduled: "25 7 * 12 *"
   max-retries: 0
 
 - name: pgadmin
@@ -103,3 +103,26 @@ components:
   - host: console
     path: /
     port: 80
+
+- name: load
+  docker:
+    file: load/Dockerfile
+  env:
+  - name: S3_BUCKET
+    config-ref: S3_BUCKET
+  - name: AWS_ACCESS_KEY_ID
+    config-ref: AWS_ACCESS_KEY_ID
+  - name: AWS_SECRET_ACCESS_KEY
+    config-ref: AWS_SECRET_ACCESS_KEY
+  - name: AWS_REGION
+    config-ref: AWS_REGION
+  - name: ENDPOINT_URL
+    config-ref: ENDPOINT_URL
+  - name: DB_HOST
+    component-ref: db
+  - name: POSTGRES_DB
+    value: 'ducklake'
+  - name: POSTGRES_USER
+    config-ref: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    config-ref: POSTGRES_PASSWORD
