@@ -61,7 +61,7 @@ function(season, limit = NULL, res) {
   }
   
   parsed_limit <- parse_limit(limit)
-  query <- "SELECT * FROM marts.fct_match_stats WHERE season = ? ORDER BY match_date LIMIT ?"
+  query <- "SELECT DISTINCT * FROM marts.fct_match_stats WHERE season = ? ORDER BY match_date LIMIT ?"
   dbGetQuery(pool, query, params = list(season, parsed_limit))
 }
 
@@ -81,7 +81,7 @@ function(season = NULL, limit = NULL, res) {
       res$status <- 400
       return(list(error = "Invalid season format. Expected YYYY-YYYY (e.g., 2025-2026)."))
     }
-    query <- "SELECT * FROM marts.fct_season_team_stats WHERE season = ? LIMIT ?"
+    query <- "SELECT DISTINCT * FROM marts.fct_season_team_stats WHERE season = ? LIMIT ?"
     dbGetQuery(pool, query, params = list(season, parsed_limit))
   }
 }
@@ -95,14 +95,14 @@ function(season = NULL, limit = NULL, res) {
   parsed_limit <- parse_limit(limit)
   
   if (is.null(season) || season == "") {
-    query <- "SELECT * FROM marts.fct_season_team_stats_home_away LIMIT ?"
+    query <- "SELECT DISTINCT * FROM marts.fct_season_team_stats_home_away LIMIT ?"
     dbGetQuery(pool, query, params = list(parsed_limit))
   } else {
     if (!is_valid_season(season)) {
       res$status <- 400
       return(list(error = "Invalid season format. Expected YYYY-YYYY (e.g., 2025-2026)."))
     }
-    query <- "SELECT * FROM marts.fct_season_team_stats_home_away WHERE season = ? LIMIT ?"
+    query <- "SELECT DISTINCT * FROM marts.fct_season_team_stats_home_away WHERE season = ? LIMIT ?"
     dbGetQuery(pool, query, params = list(season, parsed_limit))
   }
 }
