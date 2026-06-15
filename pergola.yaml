@@ -106,7 +106,7 @@ components:
 
 - name: load
   docker:
-    file: Dockerfile
+    file: /Dockerfile
     build-context: load
   env:
   - name: S3_BUCKET
