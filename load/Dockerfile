@@ -30,7 +30,7 @@ RUN R -e "renv::restore()"
 
 # 5. Copy the actual plumber API code
 COPY plumber.R plumber.R
-COPY .Renviron .Renviron
+#COPY .Renviron .Renviron
 EXPOSE 8000
 
 CMD ["R", "-e", "plumber::pr('plumber.R') |> plumber::pr_run(host='0.0.0.0', port=8000)"]
