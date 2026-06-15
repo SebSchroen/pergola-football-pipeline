@@ -104,7 +104,7 @@ components:
     path: /
     port: 80
 
-- name: load
+- name: load-api
   docker:
     file: Dockerfile
     build-context: load
