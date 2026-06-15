@@ -30,6 +30,7 @@ RUN R -e "renv::restore()"
 
 # 5. Copy the actual plumber API code
 COPY load/plumber.R plumber.R
+COPY load/utils/connection.R utils/connection.R
 #COPY .Renviron .Renviron
 EXPOSE 8000
 

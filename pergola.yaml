@@ -126,3 +126,7 @@ components:
     config-ref: POSTGRES_USER
   - name: POSTGRES_PASSWORD
     config-ref: POSTGRES_PASSWORD
+  ingresses:
+  - host: api
+    path: /
+    port: 8000
