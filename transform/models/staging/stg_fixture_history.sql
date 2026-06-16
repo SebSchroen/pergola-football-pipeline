@@ -1,4 +1,13 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='match_id',
+        incremental_strategy='merge'
+    )
+}}
+
 select
+    md5(concat(date, competition, season, team_home, team_away)) as match_id,
     date,
     season,
     competition,
@@ -21,3 +30,7 @@ select
     b365_d as b365_draw_odds,
     b365_a as b365_a_odds
 from {{ source('raw', 'fixture_history') }}
+
+{% if is_incremental() %}
+    where date >= (select max(date) from {{ this }})
+{% endif %}

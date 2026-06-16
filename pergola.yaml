@@ -33,7 +33,8 @@ components:
     config-ref: DESTINATION__DUCKLAKE__CREDENTIALS__STORAGE__BUCKET_URL
   - name: SCHEMA__NAMING
     config-ref: SCHEMA__NAMING
-  scheduled: "15 7 * * *"
+  scheduled: "0 10 * * *"
+  scheduled-timezone: "Europe/Berlin"
 
 - name: db
   docker:
@@ -78,7 +79,8 @@ components:
     value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(DB_HOST):5432/$(POSTGRES_DB)
   - name: DBT_TARGET
     value: "dev"
-  scheduled: "25 7 * 12 *"
+  scheduled: "05 10 * * *"
+  scheduled-timezone: "Europe/Berlin"
   max-retries: 0
 
 - name: pgadmin
