@@ -4,7 +4,7 @@ library(bslib)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-reactlog::reactlog_enable()
+
 # Define the base URL of your running Plumber API
 api_base_url <- Sys.getenv("API_BASE_URL")
 
