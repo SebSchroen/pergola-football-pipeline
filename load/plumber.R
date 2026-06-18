@@ -109,7 +109,7 @@ function(season = NULL, limit = NULL, res) {
 
 
 #* @get /ratings
-#* @serializer json
+#* @serializer rds
 #* Full Pi Ratings history
 #* Full historical Pi Ratings starting Season 2006/2007.
 function(limit = NULL, res) {
@@ -121,7 +121,7 @@ function(limit = NULL, res) {
 }
 
 #* @get /masterdata
-#* @serializer json
+#* @serializer rds
 #* Club header data and mapping table
 #* Full historical Pi Ratings starting Season 2006/2007.
 function() {
