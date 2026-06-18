@@ -106,3 +106,28 @@ function(season = NULL, limit = NULL, res) {
     dbGetQuery(pool, query, params = list(season, parsed_limit))
   }
 }
+
+
+#* @get /ratings
+#* @serializer json
+#* Full Pi Ratings history
+#* Full historical Pi Ratings starting Season 2006/2007.
+function(limit = NULL, res) {
+  parsed_limit <- parse_limit(limit)
+  
+  query <- "SELECT DISTINCT * FROM stg.stg_ratings_history LIMIT ?"
+  dbGetQuery(pool, query, params = list(parsed_limit))
+
+}
+
+#* @get /masterdata
+#* @serializer json
+#* Club header data and mapping table
+#* Full historical Pi Ratings starting Season 2006/2007.
+function() {
+
+  
+  query <- "SELECT DISTINCT * FROM stg.masterdata"
+  dbGetQuery(pool, query)
+
+}
