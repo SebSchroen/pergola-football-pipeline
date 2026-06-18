@@ -27,6 +27,8 @@ WORKDIR /project
 
 COPY shiny/renv.lock .
 COPY shiny/renv/activate.R renv/activate.R
+
+
 COPY shiny/.Rprofile .Rprofile
 
 # 3. Restore packages (this uses the exact versions from renv.lock)
@@ -34,6 +36,7 @@ RUN R -e "renv::restore()"
 
 # 4. Copy app files
 COPY shiny/app.R app.R
+COPY shiny/utils/ utils/
 
 EXPOSE 3838
 
