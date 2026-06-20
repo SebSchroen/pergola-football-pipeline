@@ -36,7 +36,7 @@ RUN R -e "renv::restore()"
 
 # 4. Copy app files
 COPY shiny/app.R app.R
-COPY shiny/utils/ utils/
+COPY shiny/R/ R/
 
 EXPOSE 3838
 
