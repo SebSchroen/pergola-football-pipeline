@@ -19,6 +19,7 @@ COPY shiny-rhino/. .
 
 EXPOSE 3838
 
+
 # 5. Run app
 RUN touch .httr-oauth
 CMD ["Rscript", "-e", "shiny::runApp('app.R', host='0.0.0.0', port=3838)"]
