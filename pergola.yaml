@@ -153,3 +153,21 @@ components:
   - host: shiny
     path: /
     port: 3838
+
+
+- name: shiny-rhino
+  docker:
+    file: shiny-rhino/Dockerfile
+  ports:
+    - 3838
+  env:
+  - name: API_BASE_URL
+    value: http://api-pergola-football-pipeline-dev.apps.pergola.cloud/
+  storage:
+  - name: shiny-data
+    path: /var/lib/pgadmin
+    size: 100Mi
+  ingresses:
+  - host: shiny-rhino
+    path: /
+    port: 3838
