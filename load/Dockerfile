@@ -22,16 +22,16 @@ RUN R -e "install.packages('remotes', repos='https://cloud.r-project.org')" && \
     R -e "remotes::install_version('renv', version='${RENV_VERSION}', repos='https://cloud.r-project.org')"
 
 # 3. Copy ONLY renv.lock first (for caching)
-COPY load/renv.lock renv.lock
+COPY renv.lock renv.lock
 
 # 4. Restore the R environment
 # This step will be cached by Docker unless renv.lock changes
 RUN R -e "renv::restore()"
 
 # 5. Copy the actual plumber API code
-COPY load/plumber.R plumber.R
-COPY load/utils/connection.R utils/connection.R
+COPY plumber.R plumber.R
+
 #COPY .Renviron .Renviron
 EXPOSE 8000
 
-CMD ["R", "-e", "plumber::pr('plumber.R') |> plumber::pr_run(host='0.0.0.0', port=8000)"]
+CMD ["R", "-e", "plumber2::api('plumber.R') |> plumber2::api_run(host='0.0.0.0', port=8000)"]
