@@ -23,7 +23,7 @@ server <- function(id, api_base_url) {
     
     observe({
     seasons <- request(api_base_url) |> 
-    req_url_path_append("table") |> 
+    req_url_path_append("seasons") |> 
     req_url_query() |> 
     req_perform() |> 
     resp_body_raw() |> 

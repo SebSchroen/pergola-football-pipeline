@@ -152,3 +152,17 @@ function() {
   dbGetQuery(pool, query)
 
 }
+
+
+#* Download available seasons
+#* 
+#* Get a list of available seasons in the data.
+#* 
+#* @get /seasons
+#* @serializer rds
+function() {
+  
+  query <- "SELECT DISTINCT season FROM marts.fct_season_team_stats"
+  dbGetQuery(pool, query)
+
+}

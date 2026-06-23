@@ -26,8 +26,8 @@ server <- function(id, api_base_url, season) {
       req(season) # Wait for the parent to pass a season
 
       request(api_base_url) |>
-        req_url_path_append("table") |>
-        req_url_query(season = season()) |> # Use the passed reactive here
+        req_url_path_append("table", season()) |>
+        req_url_query() |> 
         req_perform() |>
         resp_body_raw() |>
         unserialize() |>
